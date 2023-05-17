@@ -1,0 +1,17 @@
+spring web으로 하려면 프로젝트 생성할 떄 메이븐에서 web으로 해야 된다.
+생성후 bildpath 에서 JRE를 17로 바꿈
+pom 추가할거 하고...
+
+DM는https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client 에서 
+MariaDB Java Client 검색 후 3.1.2에서 복사 pom 	<version>1.9.6</version> </dependency>밑에 붙여넣기
+jstl도 JSTL.jstl 1.2 복사 pom에서 DB 밑에 붙여넣기
+spring jdbc 프라임워크도 연동해야 됨
+<dependency>
+   <groupId>org.springframework</groupId>
+  <artifactId>spring-jdbc</artifactId>
+  <version>${spring.version}</version>
+</dependency>
+하고 버전 17인지 다시 확인 후 
+톰캣 9.0다시 연결
+하고 나면 index에서 에러 난다.
+buildpath 가서 libraries 에서 Add Library에서 servers Runtime에서 톰캣 연결

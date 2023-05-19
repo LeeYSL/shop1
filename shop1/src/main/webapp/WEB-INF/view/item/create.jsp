@@ -11,13 +11,22 @@
 <title>상품등록</title>
 </head>
 <body>
-  <!--form:form :유효성 검증  -->
-	<form:form modelAttribute="item" action="register" 
+  <%-- form:form :유효성 검증  --%>
+	 <%-- form:form.../> enctype="mulitpart/form-data" 인경우 
+	                     method="post" 로 설정 됨 --%>
+	 <%--http://localhost:8080/shop1/item/create
+	          =>get 방식 : 화면출력
+	          =>post 방식 요청 : 파일 업로드+db에 데이터 저장                   
+	  --%>                    
+	<form:form modelAttribute="item" action="create" 
 		enctype="multipart/form-data"> 
 		<h2>상품등록</h2>
 		<table>
 			<tr>
 				<td>상품명</td>
+				  <%-- <form:input =>
+                  <input type="text" name="name" id="name" value="${item.name}" 
+	               form:input는 modelAttribute를 사용함? > --%>
 				<td><form:input path="name" />
 				<td><font color="red"><form:errors path="name" /></font></td> 
 			</tr>
@@ -37,6 +46,6 @@
 			</tr>
 			<tr>
 				<td colspan="3"><input type="submit" value="상품등록"> <input
-					type="text" value="상품목록" onclick="location.href='list'"></td>
+					type="button" value="상품목록" onclick="location.href='list'"></td>
 			</tr>
 		</table></form:form></body></html>

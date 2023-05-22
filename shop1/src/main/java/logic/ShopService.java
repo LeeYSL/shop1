@@ -11,11 +11,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import dao.ItemDao;
+import dao.UserDao;
 
 @Service // @Compoent + Service(controller 기능과 dao 기능의 중간 역할 기능(중간다리))
 public class ShopService {
 	@Autowired // itemDao 객체 주입
 	private ItemDao itemDao;
+	
+	@Autowired
+    private UserDao userDao;
 
 	public List<Item> itemList() {
 		return itemDao.list();
@@ -73,6 +77,19 @@ public class ShopService {
 	public void itemDelete(Integer id) {
 		itemDao.delete(id);
 
+	}
+
+	public void userInsert(User user) {
+	      userDao.insert(user);
+		
+	}
+
+	public User selectUserOne(String userid) {
+		return userDao.selectOne(userid);
+	}
+
+	public User selectUserpass(String userid, String password) {
+		return userDao.selectUserpass(userid,password);
 	}
 
 }

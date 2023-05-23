@@ -41,14 +41,14 @@ public class UserDao {
 		return template.queryForObject
 				   ("select * from useraccount where userid=:userid",param, mapper);
 	}
-	public User selectUserpass(String userid, String password)  {
-		param.clear();
-		param.put("userid",userid);
-		param.put("password",password);
-		return template.queryForObject
-				   ("select * from useraccount where userid=:userid and password=:password",param, mapper);
-	
-	}
+//	public User selectUserpass(String userid, String password)  {
+//		param.clear();
+//		param.put("userid",userid);
+//		param.put("password",password);
+//		return template.queryForObject
+//				   ("select * from useraccount where userid=:userid and password=:password",param, mapper);
+//	
+//	}
 	
 }
 	

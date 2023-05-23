@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import dao.ItemDao;
 import dao.UserDao;
+import dao.SaleDao;
+import dao.SaleItemDao;
 
 @Service // @Compoent + Service(controller 기능과 dao 기능의 중간 역할 기능(중간다리))
 public class ShopService {
@@ -20,6 +21,10 @@ public class ShopService {
 	
 	@Autowired
     private UserDao userDao;
+	@Autowired
+	private SaleDao saleDao;
+	@Autowired
+	private SaleItemDao saleItemDao;
 
 	public List<Item> itemList() {
 		return itemDao.list();
@@ -87,9 +92,32 @@ public class ShopService {
 	public User selectUserOne(String userid) {
 		return userDao.selectOne(userid);
 	}
-
-	public User selectUserpass(String userid, String password) {
-		return userDao.selectUserpass(userid,password);
+    
+	/*
+	 * 1.로그인 정보, 장바구니 정보를 이용해서 sale,saleitem 테이블에 데이터 저징
+	 * 2.결과는 sale 객체에 저장
+	 *   -sale 테이블 저장 : saleid값 구하기. 최대값+1
+	 *   -saleitem 테이블 저장 : Cart 데이터를 이용하여 저장
+	 *   
+	 */
+	public Sale checkend(User loginUser, Cart cart) {
+		int maxsaleid = saleDao.getMaxSaleId(); //saleid 최대 값 조회
+		Sale sale = new Sale();
+		sale.setSaleid(maxsaleid+1);
+		sale.setUser(loginUser);
+		sale.setUserid(loginUser.getUserid());
+		saleDao.insert(sale); //sale 테이블에 데이터 추가
+		int seq = 0;
+		for(ItemSet is : cart.getItemSetList()) {
+			SaleItem saleItem = new SaleItem(sale.getSaleid(),++seq,is);
+			sale.getItemlist().add(saleItem);
+			saleItemDao.insert(saleItem); //saleitem 테이블에 데이터 추가
+		}
+		return sale; //주문정보, 주문상품정보,상품정보,사용자 정보
 	}
+
+//	public User selectUserpass(String userid, String password) {
+//		return userDao.selectUserpass(userid,password);
+//	}
 
 }

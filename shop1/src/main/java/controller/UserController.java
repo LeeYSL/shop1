@@ -88,6 +88,7 @@ public class UserController {
 	User dbUser = service.selectUserOne(user.getUserid());
 	if (dbUser.getPassword().equals(user.getPassword())) {
 		session.setAttribute("loginUser", dbUser);
+		mav.setViewName("redirect:mypage");
 //				System.out.println("db:" + dbUser.getPassword());
 //			    System.out.println("user:"+user.getPassword());
 //			    System.out.println(dbUser.getPassword().equals(user.getPassword()));
@@ -95,10 +96,8 @@ public class UserController {
 	}else {
 			bresult.reject("error.login.pass");
 			mav.getModel().putAll(bresult.getModel());
-			return mav;
-
 		}
-		mav.setViewName("redirect:mypage");
+		
 		return mav;
 		
 		

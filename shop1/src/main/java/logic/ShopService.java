@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,9 +19,9 @@ import dao.SaleItemDao;
 public class ShopService {
 	@Autowired // itemDao 객체 주입
 	private ItemDao itemDao;
-	
+
 	@Autowired
-    private UserDao userDao;
+	private UserDao userDao;
 	@Autowired
 	private SaleDao saleDao;
 	@Autowired
@@ -85,39 +86,67 @@ public class ShopService {
 	}
 
 	public void userInsert(User user) {
-	      userDao.insert(user);
-		
+		userDao.insert(user);
+
 	}
 
 	public User selectUserOne(String userid) {
 		return userDao.selectOne(userid);
 	}
-    
+
 	/*
-	 * 1.로그인 정보, 장바구니 정보를 이용해서 sale,saleitem 테이블에 데이터 저징
-	 * 2.결과는 sale 객체에 저장
-	 *   -sale 테이블 저장 : saleid값 구하기. 최대값+1
-	 *   -saleitem 테이블 저장 : Cart 데이터를 이용하여 저장
-	 *   
+	 * 1.로그인 정보, 장바구니 정보를 이용해서 sale,saleitem 테이블에 데이터 저징 2.결과는 sale 객체에 저장 -sale 테이블
+	 * 저장 : saleid값 구하기. 최대값+1 -saleitem 테이블 저장 : Cart 데이터를 이용하여 저장
+	 * 
 	 */
 	public Sale checkend(User loginUser, Cart cart) {
-		int maxsaleid = saleDao.getMaxSaleId(); //saleid 최대 값 조회
+		int maxsaleid = saleDao.getMaxSaleId(); // saleid 최대 값 조회
 		Sale sale = new Sale();
-		sale.setSaleid(maxsaleid+1);
+		sale.setSaleid(maxsaleid + 1);
 		sale.setUser(loginUser);
 		sale.setUserid(loginUser.getUserid());
-		saleDao.insert(sale); //sale 테이블에 데이터 추가
+		saleDao.insert(sale); // sale 테이블에 데이터 추가
 		int seq = 0;
-		for(ItemSet is : cart.getItemSetList()) {
-			SaleItem saleItem = new SaleItem(sale.getSaleid(),++seq,is);
+		for (ItemSet is : cart.getItemSetList()) {
+			SaleItem saleItem = new SaleItem(sale.getSaleid(), ++seq, is);
 			sale.getItemlist().add(saleItem);
-			saleItemDao.insert(saleItem); //saleitem 테이블에 데이터 추가
+			saleItemDao.insert(saleItem); // saleitem 테이블에 데이터 추가
 		}
-		return sale; //주문정보, 주문상품정보,상품정보,사용자 정보
+		return sale; // 주문정보, 주문상품정보,상품정보,사용자 정보
 	}
 
-//	public User selectUserpass(String userid, String password) {
-//		return userDao.selectUserpass(userid,password);
-//	}
+	public User selectPassOne(String userid, String password) {
+		return userDao.selectPassOne(userid, password);
+	}
+
+	public List<Sale> salelist(String userid) {
+		List<Sale> list = saleDao.list(userid);// id 사용자가 주문 정복목록
+		for (Sale sa : list) {
+			// saleitemlist : 한개의 주문에 해당하는 주문상품 목록
+			List<SaleItem> saleitemlist = saleItemDao.list(sa.getSaleid());
+			for (SaleItem si : saleitemlist) {
+				Item item = itemDao.getItem(si.getItemid()); // 상품정보
+				si.setItem(item);
+			}
+			sa.setItemlist(saleitemlist);
+		}
+		return list;
+	}
+
+	public void userDelete(String userid) {
+		userDao.delete(userid);
+
+	}
+
+	public void userUpdate(@Valid User user) {
+		userDao.update(user);
+
+	}
+
+	public void passupdate(String userid, String chgpass) {
+		userDao.update(userid,chgpass);
+		
+	}
+
 
 }

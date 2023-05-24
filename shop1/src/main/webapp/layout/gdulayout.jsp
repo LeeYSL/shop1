@@ -56,7 +56,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   <hr>
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
-    <a href="${path}/user/mypage?id=${loginUser.userid}" 
+    <a href="${path}/user/mypage?userid=${sessionScope.loginUser.userid}" 
     class="w3-bar-item w3-button w3-padding w3-blue">
     <i class="fa fa-users fa-fw"></i>&nbsp; 회원관리</a>
     <a href="${path}/item/list" 

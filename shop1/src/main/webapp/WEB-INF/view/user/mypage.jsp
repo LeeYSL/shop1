@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%-- /shop1/src/main/webapp/WEB-INF/view/user/mypage.jsp --%>
 <%@ include file="/WEB-INF/view/jspHeader.jsp" %>
-<%--/shop1/src/main/webapp/WEB-INF/view/user/mypage.jsp --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,16 +9,16 @@
 <title>mypage</title>
 <script type="text/javascript">
    $(function(){
-      $("#minfo").show() //회원 정보 보여주기
-      $("#oinfo").hide() //주문정보 숨기기 
+      $("#minfo").show() //id 속성이 minfo인 태그(회원 정보)보여주기
+      $("#oinfo").hide() //id 속성이 oinfo인 태그(주문정보)숨기기 
       $(".saleLine").each(function(){
-         $(this).hide() //첫번 째 데이터만 나오고 class 속성이 saleLine인 것들 숨기기?
+         $(this).hide() //첫번 째 데이터만 나오고 class 속성이 saleLine인 것들 숨긴다.
         		 
       })
       $("#tab1").addClass("select")
    })
    function disp_div(id,tab) {
-      $(".info").each(function(){
+      $(".info").each(function(){ //.info : 모든 데이터
          $(this).hide()
       }) 
       
@@ -26,29 +26,31 @@
          $(this).removeClass("select")
       })
       $("#"+id).show()
-      $("#"+tab).addClass("select")
+      $("#"+tab).addClass("select") //select 클래스 속성 추가 ->클릭 시 기존은 기능 없애고 클릭 한 것 만 기능 보이게?
    }
-   function list_disp(id) {
+   function list_disp(id) { //id = saleLine0...
       $("#"+id).toggle() /* 
                           * 현재 보이는 경우 => 안보이게 바꿈
                           * 현재 안 보이는 경우 => 보이게 바꿈
                           */
    }
-</script>
-<style type="text/css">
-   .select {
-      padding:3px;
-      background-color: #0000ff;
-   }
-   .xelect>a {
-      color : #ffffff;
-      text-decoration:none;
-      font-weight: bold;
-   }
-
-</style>
+   </script>
+   <style type="text/css">
+     .select {
+        padding:3px;
+        background-color: #0000ff;
+     }
+     .select>a {
+        color : #ffffff;
+        text-decoration: none;
+        font-weight: bold;
+     }
+     .title { 
+        text-decoration: none;
+     }
+   </style>
 </head>
-<%--
+<%-- http://localhost:8080/shop1/user/mypage?userid=id명
    mypage 완성하기
    파라미터 : userid 
     salelist : userid가 주문한 전체 Sale 객체 목록.(List)
@@ -56,10 +58,10 @@
 
  --%>
 <body>
-   <table>
+    <table  class="w3-table-all">
       <tr>
          <td id="tab1" class="tab">
-            <a href="javascript:disp_div('minfo','tab1')">회원정보</a>
+            <a href="javascript:disp_div('minfo','tab1')">회원정보</a> 
          </td>
          <c:if test="${param.userid != 'admin' }">  
             <td id="tab2" class="tab">
@@ -69,7 +71,7 @@
       </tr>
    </table>
    <div id="oinfo" class="info" style="display:none; width:100%;">
-      <table>
+       <table  class="w3-table-all">
          <tr>
             <th>주문번호</th>
             <th>주문일자</th>
@@ -91,14 +93,14 @@
             </tr>
             <tr id="saleLine${stat.index}" class="saleLine">
                <td colspan="3" align="center">
-                  <table>
+                   <table  class="w3-table-all">
                      <tr>
                         <td>상품명</td>
                         <td>상품가격</td>
                         <td>주문수량</td>
                         <td>상품총액</td>
                      </tr>
-                     <c:forEach items="${sale.itemList}" var="saleItem">
+                     <c:forEach items="${sale.itemlist}" var="saleItem">
                         <tr>
                            <td class="title">${saleItem.item.name}</td>
                            <td>
@@ -120,7 +122,7 @@
          <table>
             <tr>
                <td>아이디</td>
-               <td>${user.userid}</td>
+               <td>${user.userid }</td>
             </tr>
             <tr>
                <td>이름</td>
@@ -149,7 +151,7 @@
          <a href="update?userid=${user.userid}">[회원정보수정]</a>&nbsp;
          <a href="password">[비밀번호수정]</a>&nbsp;
          <c:if test="${loginUser.userid != 'admin' }">
-            <a href="delete?userid=">[회원탈퇴]</a>&nbsp;
+            <a href="delete?userid=${user.userid}">[회원탈퇴]</a>&nbsp;
          </c:if>      
          <c:if test="${loginUser.userid == 'admin' }">
             <a href="../admin/list">[회원목록]</a>&nbsp;

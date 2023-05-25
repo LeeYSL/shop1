@@ -30,7 +30,7 @@
 				<td>상품이미지</td>
 				<td><input type="file" name="picture"/></td>
 				<td>${item.pictureUrl}</td>
-			</tr>
+			</tr> 
 			<tr>
 				<td>상품설명</td>
 				<td><form:textarea path="description" cols="20" rows="5"/></td>

@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
@@ -74,5 +75,21 @@ public class UserDao {
 
 
 	}
+
+	public List<User> list() {
+		return template.query("select * from useraccount", param,mapper); 
+		//mapper : useraccount에 있는 컬럼명과 userclass 있는 이름이 같은걸 가져와..? 무슨뜻..
+	}
+  
+	// selete * from useraccount where userid in ('admin','test1')
+	public List<User> list(String[] idchks) { //마이바티스는 같은 이름을 쓸 수 없지만 지금은 오버로딩 되어서 쓸 수 있다.
+		StringBuilder ids = new StringBuilder();
+		  for(int i=0;i<idchks.length; i++) {
+			  ids.append("'").append(idchks[i]).append((i==idchks.length-1)?"'":"',");
+	}
+		  String sql = "select * from useraccount where userid in (" + ids.toString() + ")";	
+		return template.query(sql, mapper);
+	}
+	
 
 }

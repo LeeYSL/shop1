@@ -141,11 +141,6 @@
 		</dependency>
 		<!-- sitemesh 설정 끝-->
 		
-		<dependency>
-			<groupId>gdu.kr</groupId>
-			<artifactId>chap1</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<finalName>shop1</finalName>

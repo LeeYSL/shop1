@@ -21,7 +21,7 @@
 	<form:form modelAttribute="item" action="create" 
 		enctype="multipart/form-data"> 
 		<h2>상품등록</h2>
-		<table>
+		<table> 
 			<tr>
 				<td>상품명</td>
 				  <%-- <form:input =>

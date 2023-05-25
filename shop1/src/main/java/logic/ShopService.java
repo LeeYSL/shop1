@@ -148,5 +148,13 @@ public class ShopService {
 		
 	}
 
+	public List<User> list() {
+		return userDao.list(); //회원 목록 조회
+	}
+
+	public List<User> getUserList(String[] idchks) {
+		return userDao.list(idchks);
+	}
+
 
 }

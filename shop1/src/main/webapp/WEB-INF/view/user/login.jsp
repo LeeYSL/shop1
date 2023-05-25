@@ -29,7 +29,7 @@
 
 				</c:forEach></font>
 		</spring:hasBindErrors>
-		<table>
+		<table> 
 			<tr>
 				<td>아이디</td>
 				<td><form:input path="userid" /> <font color="red"><form:errors
@@ -37,7 +37,7 @@
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td><form:input path="password" /> <font color="red"><form:errors
+				<td><form:input type="password" path="password" /> <font color="red"><form:errors
 							path="password" /></font></td>
 			</tr>
 			<tr>

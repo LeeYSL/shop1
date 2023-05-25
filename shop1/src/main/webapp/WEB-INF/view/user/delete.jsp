@@ -28,5 +28,5 @@
 		비밀번호 <input type="password" name="password"> <a
 			href="javascript:document.deleteForm.submit()">[회원탈퇴] </a>
 	</form>
-</body>
+</body> 
 </html>

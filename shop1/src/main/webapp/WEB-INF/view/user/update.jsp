@@ -36,7 +36,7 @@
 			<tr>
 				<td>전화번호</td>
 				<td><form:input path="phoneno" /></td>
-			</tr>
+			</tr> 
 			<tr>
 				<td>우편번호</td>
 				<td><form:input path="postcode" /></td>

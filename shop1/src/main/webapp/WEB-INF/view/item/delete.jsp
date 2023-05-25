@@ -33,7 +33,7 @@
 							</form>
 						</td>
 					</tr>
-				</table>
+				</table> 
 		   </td>
 	</table>
 </body>

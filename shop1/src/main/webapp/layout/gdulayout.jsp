@@ -16,6 +16,8 @@
 <script type="text/javascript" src= 
 "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
 </script>
+<script type="text/javascript"
+	src="http://cdn.ckeditor.com/4.5.7/full/ckeditor.js"></script>
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
@@ -52,7 +54,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       <span><strong>로그인하세요</strong></span><br>
       </c:if>
     </div>
-  </div>
+  </div> 
   <hr>
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>

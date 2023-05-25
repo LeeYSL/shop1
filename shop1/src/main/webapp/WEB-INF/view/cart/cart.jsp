@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>장바구니</title>
 </head>
-<body>
+<body> 
 	<h2>장바구니</h2>
 	<table>
 		<tr>

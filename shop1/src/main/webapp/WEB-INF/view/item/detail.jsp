@@ -34,7 +34,7 @@
 								<table>
 									<tr>
 										<td><select name="quantity">
-												<c:forEach begin="1" end="10" var="i">
+					 							<c:forEach begin="1" end="10" var="i">
 													<option>${i}</option>
 												</c:forEach>
 										</select></td>

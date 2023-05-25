@@ -297,11 +297,11 @@ public class UserController {
 	    (String password, HttpSession session, String chgpass, String chgpass2) {
 		//비밀번호 검증
 		User loginUser = (User) session.getAttribute("loginUser");
-		if (!password.equals(loginUser.getPassword())) {
-			//password : 현재비밀번호
-			//loginUser : 로그인 된 비밀번호
-			throw new LoginException("비밀번호를 확인하세요", "password");
-		}
+//		if (!password.equals(loginUser.getPassword())) {
+//			//password : 현재비밀번호
+//			//loginUser : 로그인 된 비밀번호
+//			throw new LoginException("비밀번호를 확인하세요", "password");
+//		}
 		try {
 			service.passupdate(loginUser.getUserid(),chgpass);
 			loginUser.setPassword(chgpass);//로그인 정보에 비밀번호 수정

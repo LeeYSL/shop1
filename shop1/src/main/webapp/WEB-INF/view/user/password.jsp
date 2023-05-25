@@ -38,6 +38,6 @@
 				<td colspan="2"><input type="submit" value="비밀번호 변경"></td>
 			</tr>
 		</table>
-	</form>
+	</form> 
 </body>
 </html>

@@ -27,7 +27,7 @@
 				<font color="red"><form:errors path="userid" /></font></td>
 			</tr>
 			<tr>
-				<td>비밀번호</td>
+				<td>비밀번호</td> 
 				<td><form:input path="password" />
 				<font color="red"><form:errors path="password" /></font>
 			</tr>

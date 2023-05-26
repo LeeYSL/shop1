@@ -13,6 +13,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.annotation.SessionScope;
@@ -293,9 +294,8 @@ public class UserController {
 	 * 
 	 */
 	@PostMapping("password")
-	public String loginCheckpw
-	    (String password, HttpSession session, String chgpass, String chgpass2) {
-		//비밀번호 검증
+	public String loginCheckpw(String password, HttpSession session, String chgpass, String chgpass2) {
+		// 비밀번호 검증
 		User loginUser = (User) session.getAttribute("loginUser");
 //		if (!password.equals(loginUser.getPassword())) {
 //			//password : 현재비밀번호
@@ -303,16 +303,67 @@ public class UserController {
 //			throw new LoginException("비밀번호를 확인하세요", "password");
 //		}
 		try {
-			service.passupdate(loginUser.getUserid(),chgpass);
-			loginUser.setPassword(chgpass);//로그인 정보에 비밀번호 수정
-			
+			service.passupdate(loginUser.getUserid(), chgpass);
+			loginUser.setPassword(chgpass);// 로그인 정보에 비밀번호 수정
+
 		} catch (Exception e) {
-		
-			throw new LoginException
-			("비밀번호 변경 시  오류발생.", "password");
+
+			throw new LoginException("비밀번호 변경 시  오류발생.", "password");
 
 		}
 		return ("redirect:mypage?userid=" + loginUser.getUserid());
 	}
+
+	@PostMapping("{url}search") // ${url} = String url
+	// ${url}seach : url 지정 x url 상관 없이 (*) search 인 요청시 호출 되는 메서드
+	public ModelAndView search(User user, BindingResult bresult, @PathVariable String url) {
+		// @PathVariable : {url}의 이름을 매개변수로 전달
+		// ex) 요청이 idsearch인 경우 url <= "id" pwsearch인 경우 url <= "pw"
+		ModelAndView mav = new ModelAndView();
+		String code = "error.userid.search";
+		String title = "아이디"; // 어떤 찾기인지 title이 값을 가지고 있다.
+		if (url.equals("pw")) {// 비밀번호 검증인 경우
+			title = "비밀번호";
+			code = "eroor.password.search";
+			if (user.getUserid() == null || user.getUserid().trim().equals("")) {
+				// BindingResult.reject() : global error
+				// => jsp의 <spring:hasBindErrors ..부분에 오류 출력
+
+				// BindingResult.rejectValue() :
+				// =>jsp의 <formLerrors path= ... 부분에 오류 출력
+				bresult.rejectValue("userid", "error.required"); // error.required.userid 오류코드
+			}
+		}
+		if (user.getEmail() == null || user.getEmail().trim().equals("")) {
+			bresult.rejectValue("email", "error.required"); // error.required.email 오류 코드
+		}
+		if (user.getPhoneno() == null || user.getPhoneno().trim().equals("")) {
+			bresult.rejectValue("phoneno", "error.required");// error.required.phonene 오류 코드
+		}
+		if (bresult.hasErrors()) {
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}
+		// 입력 검증 정상 완료
+		if (user.getUserid() != null && user.getUserid().trim().equals("")) {
+			user.setUserid(null);
+		}
+		/*
+		 * user.getUserid() == null : 아이디 찾기 =? 아이 user.getUserid() != null : 비밀번호 찾기 =
+		 * > 비밀번호
+		 */
+		String result = null;
+		try {
+			result = service.getSearch(user);
+		} catch (EmptyResultDataAccessException e) {
+			bresult.reject(code);
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}
+		mav.addObject("result", result);
+		mav.addObject("title", title);
+		mav.setViewName("search"); // 어떤 search로 들어와도 그냥 search?
+		return mav;
+		
+	}
 }
- 

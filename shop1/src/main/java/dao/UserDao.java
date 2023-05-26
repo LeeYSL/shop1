@@ -87,9 +87,38 @@ public class UserDao {
 		  for(int i=0;i<idchks.length; i++) {
 			  ids.append("'").append(idchks[i]).append((i==idchks.length-1)?"'":"',");
 	}
+		  /*
+		   * mapper : select 구문의 실행 결과 값 
+		   * mapper = new BeanPropertyRowMapper<User>(User.class);  
+		   *   = > mapper는 user 클래스를 가지고 있어서
+		   *     1. user 객체 생성
+		   *     2. userid 컬럼을 setUserid  로 넣어줌 
+		   *     ....
+		   */
 		  String sql = "select * from useraccount where userid in (" + ids.toString() + ")";	
 		return template.query(sql, mapper);
 	}
-	
+
+
+	public String search(User user) {
+	   String col ="userid";
+	   if(user.getUserid() != null) col = "password";
+	   String sql = "select "+ col +" from useraccount "
+			   + "where email=:email and phoneno=:phoneno";
+	   if(user.getUserid() != null) {
+		   sql += " and userid=:userid";
+	   }
+	   /*
+	    * BeanPropertySqlParameterSource(user) : user 객체의 프로퍼티로 파라미터 설정.
+	    *              : email : user.getEmail()
+	    *              : phoneno : user.getPhone()
+	    *              
+	    *  String.class : select 구문의 결과의 자료형             
+	    */
+	   SqlParameterSource param = 
+			     new BeanPropertySqlParameterSource(user);
+		return template.queryForObject(sql, param,String.class);
+	}
+
 
 }

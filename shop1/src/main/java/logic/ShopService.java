@@ -96,7 +96,7 @@ public class ShopService {
 
 	/*
 	 * 1.로그인 정보, 장바구니 정보를 이용해서 sale,saleitem 테이블에 데이터 저징 2.결과는 sale 객체에 저장 -sale 테이블
-	 * 저장 : saleid값 구하기. 최대값+1 -saleitem 테이블 저장 : Cart 데이터를 이용하여 저장
+	 * 저장 : saleid값 구하기. 최대값+1 ,saleitem 테이블 저장 : Cart 데이터를 이용하여 저장
 	 * 
 	 */
 	public Sale checkend(User loginUser, Cart cart) {
@@ -155,6 +155,8 @@ public class ShopService {
 	public List<User> getUserList(String[] idchks) {
 		return userDao.list(idchks);
 	}
- 
 
+	public String getSearch(User user) {
+		return userDao.search(user);
+}
 }

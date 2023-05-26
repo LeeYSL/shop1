@@ -10,7 +10,7 @@ public class Mail {
   private String recipient;
   private String title;
   private String mtype;
-  private List<MultipartFile> fiel; //메일 전송 시 첨부파일 2개 가능하도록
+  private List<MultipartFile> file1; //메일 전송 시 첨부파일 2개 가능하도록
   private String contents;
 public String getNaverid() {
 	return naverid;
@@ -42,11 +42,11 @@ public String getMtype() {
 public void setMtype(String mtype) {
 	this.mtype = mtype;
 }
-public List<MultipartFile> getFiel() {
-	return fiel;
+public List<MultipartFile> getFile1() {
+	return file1;
 }
-public void setFiel(List<MultipartFile> fiel) {
-	this.fiel = fiel;
+public void setFile1(List<MultipartFile> file1) {
+	this.file1 = file1;
 }
 public String getContents() {
 	return contents;
@@ -57,7 +57,7 @@ public void setContents(String contents) {
 @Override
 public String toString() {
 	return "Mail [naverid=" + naverid + ", naverpw=" + naverpw + ", recipient=" + recipient + ", title=" + title
-			+ ", mtype=" + mtype + ", fiel=" + fiel + ", contents=" + contents + "]";
+			+ ", mtype=" + mtype + ", file1=" + file1 + ", contents=" + contents + "]";
 }
   
   

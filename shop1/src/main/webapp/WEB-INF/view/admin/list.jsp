@@ -41,7 +41,7 @@
 				       <a href="list?sort=41" class="noline">▼</a>
 				</th>
 				<th>이메일<a href="list?sort=50" class="noline">▲</a> 
-				       <a href="list?sort=51" class="noline">▼</a>
+				       <a href="list?sort=51" class="noline">▼</a> 
 				</th>
 				<th></th>
 				<th><input type="checkbox" name="allchk"

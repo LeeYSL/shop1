@@ -35,7 +35,7 @@ public class echoHandler extends TextWebSocketHandler implements InitializingBea
 	    	s.sendMessage(new TextMessage(loadMessage)); //클라이언트에서 받은 메세지를 모든 클라이언트한테 다시 전송
 	    }
 		
-	}
+	} 
 
 	
 	@Override

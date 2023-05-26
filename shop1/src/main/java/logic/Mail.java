@@ -3,7 +3,7 @@ package logic;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
-
+ 
 public class Mail {
   private String naverid;
   private String naverpw;

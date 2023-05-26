@@ -315,3 +315,4 @@ public class UserController {
 		return ("redirect:mypage?userid=" + loginUser.getUserid());
 	}
 }
+ 

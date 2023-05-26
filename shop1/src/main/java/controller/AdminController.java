@@ -105,5 +105,5 @@ public class AdminController {
 		mav.addObject("list", list);
 		return mav;
 	}
-
+ 
 }

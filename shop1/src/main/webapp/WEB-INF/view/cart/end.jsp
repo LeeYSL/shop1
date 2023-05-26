@@ -10,7 +10,7 @@
 <body>
 	<h2>${sale.user.username}님이주문하신 정보입니다.</h2>
 	<h2>배송지 정보</h2>
-	<table>
+	<table> 
 		<tr>
 			<td width="30%">주문아이디</td>
 			<td width="70%">${sessionScope.loginUser.userid}</td>

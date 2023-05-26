@@ -15,7 +15,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import logic.SaleItem;
-
+ 
 @Repository //shop service에 주입
 public class SaleItemDao {
 	private NamedParameterJdbcTemplate template;

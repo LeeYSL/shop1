@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import logic.Sale;
 import logic.SaleItem;
-
+ 
 @Repository 
 public class SaleDao {
 	private NamedParameterJdbcTemplate template;

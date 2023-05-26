@@ -11,4 +11,4 @@ error.login.input=로그인 정보 입력 오류입니다.
 error.login.id=id를 확인하세요.
 error.login.pass=password를 확인하세요.
 error.update.user=회원정보 수정 시 오류입니다.
-error.delete.admin=관리자의 경우 탈퇴 불가능 합니다.
+error.delete.admin=관리자의 경우 탈퇴 불가능 합니다. 

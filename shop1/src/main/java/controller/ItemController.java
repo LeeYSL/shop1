@@ -50,7 +50,7 @@ public class ItemController {
     	ModelAndView mav = new ModelAndView();
     	mav.addObject(new Item());
     	return mav;
-    }
+    } 
     @PostMapping("create") //Post 방식 요청 유효성 검사
     public ModelAndView register(@Valid Item item,  BindingResult bresult,
     		HttpServletRequest request ) {  //@Valid 후 반드시 BindingResult 넣어야 됨 bresult : 유효성 검사 한 결과

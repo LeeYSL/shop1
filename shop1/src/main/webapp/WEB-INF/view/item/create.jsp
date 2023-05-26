@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상품등록</title>
+<title>상품등록</title> 
 </head>
 <body>
   <%-- form:form :유효성 검증  --%>

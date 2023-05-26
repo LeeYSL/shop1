@@ -155,6 +155,6 @@ public class ShopService {
 	public List<User> getUserList(String[] idchks) {
 		return userDao.list(idchks);
 	}
-
+ 
 
 }

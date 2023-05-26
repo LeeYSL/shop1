@@ -102,6 +102,6 @@ public class CartController {
 		mav.addObject("sale",sale);
 		return mav;
 	}
-	
+	 
 
 }

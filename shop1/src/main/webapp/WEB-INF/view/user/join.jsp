@@ -20,7 +20,7 @@
 				</c:forEach>
 			</font>
 		</spring:hasBindErrors>
-		<table>
+		<table> 
 			<tr>
 				<td>아이디</td>
 				<td><form:input path="userid" />

@@ -38,5 +38,5 @@ public class UserLigubAspect {
 			if(loginUser == null) {
 				throw new LoginException("로그인 후 거래하세요","../user/login"); 
 		}
-	}
+	} 
 }

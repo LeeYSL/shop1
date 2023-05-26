@@ -29,7 +29,7 @@ public class SaleItem {
 	public int getSeq() {
 		return seq;
 	}
-
+ 
 	public void setSeq(int seq) {
 		this.seq = seq;
 	}

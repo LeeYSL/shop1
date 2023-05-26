@@ -59,7 +59,7 @@ public class UserDao {
 		template.update(sql, param);
 
 	}
-
+ 
 	public void delete(String userid) {
 		param.clear();
 		param.put("userid", userid);
@@ -73,7 +73,7 @@ public class UserDao {
 		param.put("password", chgpass);
 		template.update("update useraccount set password=:password where userid=:userid",param);
 
-
+ 
 	}
 
 	public List<User> list() {

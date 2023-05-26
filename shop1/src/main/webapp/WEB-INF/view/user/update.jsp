@@ -18,7 +18,7 @@
 			</font>
 		</spring:hasBindErrors>
 		<table>
-			<tr>
+			<tr> 
 				<td>아이디</td>
 				<td><form:input path="userid" readonly="true" />
 				<font color="red"><form:errors path="userid" /></font></td>

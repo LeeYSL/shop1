@@ -33,7 +33,7 @@ public class Sale {
     }
 public int getSaleid() {
 	return saleid;
-}
+} 
 public void setSaleid(int saleid) {
 	this.saleid = saleid;
 }

@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/view/jspHeader.jsp"%>
 <!DOCTYPE html>
 <html>
-<head>
+<head> 
 <meta charset="UTF-8">
 <title>회원 목록</title>
 <script type="text/javascript">

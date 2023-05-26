@@ -16,7 +16,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import logic.Item;
-
+ 
 @Repository //@Compoent + dao 기능(데이터베이스 연결)
 public class ItemDao {
       private NamedParameterJdbcTemplate template;

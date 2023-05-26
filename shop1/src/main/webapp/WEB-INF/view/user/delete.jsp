@@ -17,7 +17,7 @@
 			<td>이름</td>
 			<td>${user.username}</td>
 		</tr>
-		<tr>
+		<tr> 
 			<td>생년월일</td>
 			<td><fmt:formatDate value="${user.birthday}"
 					pattern="yyyy-MM-dd" /></td>

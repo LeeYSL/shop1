@@ -32,4 +32,4 @@ public class SiteMeshFilter extends ConfigurableSiteMeshFilter{
 	protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
 		builder.addDecoratorPath("/*", "/layout/gdulayout.jsp");
 	}
-}
+} 

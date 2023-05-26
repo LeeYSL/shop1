@@ -17,7 +17,7 @@
 			<th width="100">가격</th>
 			<th width="80">수정</th>
 			<th width="80">삭제</th>
-		</tr>
+		</tr> 
 		<c:forEach items="${itemList}" var="item">
 			<tr>
 				<td align="center">${item.id}</td>

@@ -11,7 +11,7 @@
 <body>
 	<h2>배송지 정보</h2>
 	<table>
-		<tr> 
+		<tr>  
 			<td width="30%">주문아이디</td>
 			<td width="70%">${sessionScope.loginUser.userid}</td>
 		</tr>

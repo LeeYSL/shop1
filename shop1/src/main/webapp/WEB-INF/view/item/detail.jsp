@@ -14,7 +14,7 @@
 		<tr>
 			<td><img src="../img/${item.pictureUrl}"></td>
 			<td>
-				<table>
+				<table> 
 					<tr>
 						<td>상품명</td>
 						<td>${item.name}</td>

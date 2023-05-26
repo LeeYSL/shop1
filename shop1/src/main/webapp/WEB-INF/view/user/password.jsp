@@ -17,7 +17,7 @@
 	}
 </script>
 </head>
-<body>
+<body> 
 	<h2>비밀번호 변경</h2>
 	<form action="password" method="post" name="f"
 		onsubmit="return inchk(this)">

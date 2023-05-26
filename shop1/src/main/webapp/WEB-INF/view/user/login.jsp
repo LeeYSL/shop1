@@ -15,7 +15,7 @@
 	}
 </script>
 </head>
-<body>
+<body> 
 	<h2>사용자 로그인</h2>
 	<form:form modelAttribute="user" method="post" action="login"
 		name="loginform">

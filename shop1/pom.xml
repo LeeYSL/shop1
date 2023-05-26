@@ -140,7 +140,13 @@
 			<version>3.0.1</version>
 		</dependency>
 		<!-- sitemesh 설정 끝-->
-		
+        <!-- 메일 환경 설정-->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		<!-- 메일 설정 끝-->
 	</dependencies>
 	<build>
 		<finalName>shop1</finalName>

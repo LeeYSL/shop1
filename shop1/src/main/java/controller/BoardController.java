@@ -75,6 +75,8 @@ public class BoardController {
 		if(param.get("pageNum") != null)
 			pageNum = Integer.parseInt(param.get("pageNum"));
 		String boardid = param.get("boardid");
+		String searchtype = param.get("searchtype");
+		String searchcontent = param.get("searchcontent");
 		if (pageNum == null || pageNum.toString().equals("")) {
 			pageNum = 1;
 		}
@@ -82,6 +84,10 @@ public class BoardController {
 			boardid = "1";
 		}
 		session.setAttribute("boardid", boardid);
+		if(searchtype == null || searchcontent == null || searchtype.trim().equals("") || searchcontent.trim().equals("")) {
+		 return mav;
+			
+		}
 		String boardName = null;
 		switch (boardid) {
 		case "1":

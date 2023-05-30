@@ -47,6 +47,10 @@ public class BoardDao {
 		String sql = "select count(*) from board where boardid=:boardid";
 		param.clear();
 		param.put("boardid", boardid);
+		if(searchtype != null searchcontent != null) { //검색 요청
+			sql += " and " + searchtype + " Wlike :searchcontent";
+			param.put("searchcontent","%" + searchcontent + "%");
+		}
 		return template.queryForObject(sql, param, Integer.class);
 	}
 

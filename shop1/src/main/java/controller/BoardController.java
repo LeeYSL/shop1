@@ -85,7 +85,8 @@ public class BoardController {
 		}
 		session.setAttribute("boardid", boardid);
 		if(searchtype == null || searchcontent == null || searchtype.trim().equals("") || searchcontent.trim().equals("")) {
-		 return mav;
+		 searchtype = null;
+		 searchcontent = null;
 			
 		}
 		String boardName = null;
@@ -102,9 +103,9 @@ public class BoardController {
 
 		}
 		int limit = 10; // 한 페이지에 보여줄 게시물 건 수
-		int listcount = service.boardcount(boardid); // 등록 된 게시물 건 수
+		int listcount = service.boardcount(boardid,searchtype,searchcontent); // 등록 된 게시물 건 수
 		// boardlist : 현재 페이지에 보여줄 게시물 목록
-		List<Board> boardlist = service.boardlist(pageNum, limit, boardid);
+		List<Board> boardlist = service.boardlist(pageNum, limit, boardid,searchtype,searchcontent);
 		// 페이징 처리를 위한 값
 		int maxpage = (int) ((double) listcount/limit + 0.95);// 등록 건수에 따른 최대 페이지
 		int startpage = (int) ((pageNum / 10.0 + 0.9) - 1) * 10 + 1;// 페이지의 시작 번호

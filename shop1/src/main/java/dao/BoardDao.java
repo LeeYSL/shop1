@@ -43,12 +43,12 @@ public class BoardDao {
 
 	}
 
-	public int count(String boardid) {
+	public int count(String boardid, String searchtype, String searchcontent ) {
 		String sql = "select count(*) from board where boardid=:boardid";
 		param.clear();
 		param.put("boardid", boardid);
-		if(searchtype != null searchcontent != null) { //검색 요청
-			sql += " and " + searchtype + " Wlike :searchcontent";
+		if(searchtype != null && searchcontent != null) { //검색 요청
+			sql += " and " + searchtype + " like :searchcontent";
 			param.put("searchcontent","%" + searchcontent + "%");
 		}
 		return template.queryForObject(sql, param, Integer.class);
@@ -57,10 +57,15 @@ public class BoardDao {
 	private String select = "select num,writer,pass,title,content,file1 fileurl,"
 			+ " regdate, readcnt, grp, grplevel, grpstep, boardid from board";
 
-	public List<Board> list(Integer pageNum, int limit, String boardid) {
+	public List<Board> list(Integer pageNum, int limit, String boardid,String searchtype, String searchcontent) {
 		param.clear();
 		String sql = select;
-		sql += " where boardid=:boardid order by grp desc, grpstep asc limit :startrow, :limit";
+//		sql += " where boardid=:boardid order by grp desc, grpstep asc limit :startrow, :limit";
+		sql += " where boardid=:boardid";
+		if(searchtype != null && searchcontent != null ) {
+			sql += " and " + searchtype + " like :searchcontent";
+			param.put("searchcontent","%" + searchcontent + "%");
+		}
 		param.put("startrow", (pageNum - 1) * limit); // 1페이지 : 0, 2페이지 :10 페이지
 		param.put("limit", limit);
 		param.put("boardid", boardid);

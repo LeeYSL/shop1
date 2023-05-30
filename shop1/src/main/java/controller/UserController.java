@@ -25,12 +25,13 @@ import logic.ShopService;
 import logic.User;
 
 @Controller
-@RequestMapping("user")
+@RequestMapping("user") //get,post 둘 다 상관 없다.
 public class UserController {
 	@Autowired
 	private ShopService service;
 
-	@GetMapping("*") // @PostMapping("*") => 컨트롤러에 설정되지 않은 모든 요청시 호출 되는 메서드
+	@GetMapping("*") // 메서드가 get 방식 일 때
+	// @PostMapping("*") => 컨트롤러에 설정되지 않은 모든 요청시 호출 되는 메서드
 	public ModelAndView join() {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject(new User());
@@ -38,8 +39,8 @@ public class UserController {
 
 	}
 
-	@PostMapping("join")
-	public ModelAndView ueseAdd(@Valid User user, BindingResult bresult) {
+	@PostMapping("join")// 메서드가 post 방식일 때
+	public ModelAndView ueseAdd(@Valid User user, BindingResult bresult) { //@Valid User user BindingResult bresult  가 있어야 유효성 검사한 결과를 넣을 수 있다.
 		ModelAndView mav = new ModelAndView();
 		if (bresult.hasErrors()) {
 			mav.getModel().putAll(bresult.getModel());
@@ -316,7 +317,7 @@ public class UserController {
 
 	@PostMapping("{url}search") // ${url} = String url
 	// ${url}seach : url 지정 x url 상관 없이 (*) search 인 요청시 호출 되는 메서드
-	public ModelAndView search(User user, BindingResult bresult, @PathVariable String url) {
+	public ModelAndView search(User user, BindingResult bresult, @PathVariable String url) { //user 앞에 @Valid가 없으면 직접 유효성 검사 하겠다.?
 		// @PathVariable : {url}의 이름을 매개변수로 전달
 		// ex) 요청이 idsearch인 경우 url <= "id" pwsearch인 경우 url <= "pw"
 		ModelAndView mav = new ModelAndView();
@@ -356,7 +357,7 @@ public class UserController {
 		try {
 			result = service.getSearch(user);
 		} catch (EmptyResultDataAccessException e) {
-			bresult.reject(code);
+			bresult.reject(code); 
 			mav.getModel().putAll(bresult.getModel());
 			return mav;
 		}

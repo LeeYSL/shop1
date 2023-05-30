@@ -62,7 +62,7 @@ public class AdminController {
 //		mav.addObject(new User());
 //		return mav;
 //	}
-	@RequestMapping("list")
+	@RequestMapping("list") //get,post 둘 다 상관 없다. o
 	public ModelAndView adminChecklist(String sort, HttpSession Session) {
 		ModelAndView mav = new ModelAndView();
 		// list : db에 등록 된 모든 회원 정보를 저장하고 있는 목록

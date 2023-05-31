@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.checkerframework.checker.units.qual.t;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
@@ -47,8 +48,8 @@ public class BoardDao {
 		String sql = "select count(*) from board where boardid=:boardid";
 		param.clear();
 		param.put("boardid", boardid);
-		if(searchtype != null && searchcontent != null) { //검색 요청
-			sql += " and " + searchtype + " like :searchcontent";
+		if(searchtype != null && searchcontent != null) { //검색 값을 가지고 있는 상태(검색 요청)
+			sql += " and " + searchtype + " like :searchcontent"; //like searchcontent
 			param.put("searchcontent","%" + searchcontent + "%");
 		}
 		return template.queryForObject(sql, param, Integer.class);
@@ -86,4 +87,14 @@ public class BoardDao {
 		String sql = "update board set readcnt = readcnt + 1 " + " where num=:num";
 		template.update(sql, param);
 	}
+
+
+	public void updateGrpStep(Board board) {
+		String sql = "update board set grpstep=grpstep +1"
+                  + " where grp = :grp and grpstep > :grpstep";
+		param.clear();
+		param.put("grp", board.getGrp()); // 원글의 grp
+		param.put("grpstep", board.getGrpstep()); // 원글의 grpstep
+		template.update(sql, param);
+ 	}
 }

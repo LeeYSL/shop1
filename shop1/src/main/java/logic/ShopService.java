@@ -1,6 +1,7 @@
 package logic;
 
 import java.io.File;
+import java.net.http.HttpRequest;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +9,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import dao.BoardDao;
@@ -185,12 +187,27 @@ public class ShopService {
 	}
 
 	public Board getBoard(Integer num) {
-	    return boardDao.selectOne(num);
+	    return boardDao.selectOne(num); //board 레코드 조회
 		
 	}
 	public void addReadcnt(Integer num) {
-	    boardDao.addReadcnt(num);
+	    boardDao.addReadcnt(num); //조회수 증가
 		
 	}
+     @Transactional // 보통 서비스 부분에 넣음. 트랜젝션(거래를 원자화한다. all or nothing) 처리한다는 뜻
+     //오류가 나면 rollback 처리 함
+	public void boardReply(Board board) {
+		boardDao.updateGrpStep(board);// 이미 등록된 grpstep 값 1 씩 증가
+		int max = boardDao.maxNum();
+		//원글의 부분을 답변글로 바꾸는 부분?
+ 		board.setNum(++max); // 원글의 num 값을 답변글의 num 값으로 변경
+ 		                     // 원글의 grp 값 => 답변글의 grp 값을 동일 설정 필요 없음
+ 		                     // 원글의 boardid => 답변글의 boardid 값을 동일. 설정 필요 없음
+ 		board.setGrplevel(board.getGrplevel() +1); // 원글의 grplevel => +1을 해서 답변글의 grplevel 값으로 설정 
+ 		board.setGrpstep(board.getGrpstep() +1 ); // 원글의 grpstep => +1을 해서 답변글의 grpstep 값으로 설정 	
+ 		boardDao.insert(board);	
+		
+	}
+	
 	
 }

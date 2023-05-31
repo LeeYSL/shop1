@@ -74,4 +74,13 @@
 	<websocket:handlers>
 	  <websocket:mapping handler="echoHandler" path="/chatting"/>
 	 </websocket:handlers>
+	 <!-- interceptor 설정 부분 : 요청 url 실행 전 후에 처리 -->
+	 <mvc:interceptors>
+ 	   <mvc:interceptor>
+	      <mvc:mapping path="/board/write"/> <!-- AOP는 메서드의 이름이나 매개변수로 설정함 interceptor는 url을 걸쳐서 온다? -->
+	      <mvc:mapping path="/board/update"/> 
+	      <mvc:mapping path="/board/delete"/> 
+	      <bean class="interceptor.BoardInterceptor" />
+	   </mvc:interceptor>
+	 </mvc:interceptors>
 </beans>

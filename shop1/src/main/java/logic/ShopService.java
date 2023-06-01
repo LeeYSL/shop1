@@ -55,8 +55,9 @@ public class ShopService {
 
 	}
 
-	private void uploadFileCreate(MultipartFile file, String path) {
+	public void uploadFileCreate(MultipartFile file, String path) {
 		// file : 파일의 내용 path : 업로드할 파일
+		// path : 업로드할 폴더
 		String orgFile = file.getOriginalFilename(); // 파일 이름
 		File f = new File(path);
 		if (!f.exists())
@@ -208,6 +209,20 @@ public class ShopService {
  		boardDao.insert(board);	
 		
 	}
-	
+
+	public void boardUpdate(Board board, HttpServletRequest request) {
+		if(board.getFile1() != null && !board.getFile1().isEmpty()) { //업르드 된 파일이 있는 상태
+			String path = request.getServletContext().getRealPath("/") + "board/file/";
+			//파일 업로드 : board.getFile()의 내용을 파일로 생성
+			this.uploadFileCreate(board.getFile1(), path);
+			board.setFileurl(board.getFile1().getOriginalFilename());
+		}
+		boardDao.update(board);
+
+	}
+
+	public void boardDelete(Integer num) {
+		boardDao.delete(num);
+	}		
 	
 }

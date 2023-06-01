@@ -53,7 +53,8 @@
 			<!-- exception.CartEmptyException 예외 발생 => /WEB-INF/view/exection.jsp 
 				로 제어 이동 -->
 			<value>exception.CartEmptyException=exception
-				exception.LoginException=exception
+				   exception.LoginException=exception
+				   exception.BoardException=exception
 			</value>
 		</property>
 	</bean>

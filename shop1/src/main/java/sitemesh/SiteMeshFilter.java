@@ -35,5 +35,6 @@ public class SiteMeshFilter extends ConfigurableSiteMeshFilter{
 		builder.addDecoratorPath("/*", "/layout/gdulayout.jsp")
 		.addExcludedPath("/user/id*") //sitemesh 대상이 아님
 		.addExcludedPath("/user/pw*");
+
 	}
 } 

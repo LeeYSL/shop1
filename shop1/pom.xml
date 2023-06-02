@@ -178,7 +178,12 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.13.4</version>
 		</dependency>
-
+       <!-- 크롤링을 위한 jsoup 설정-->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.15.4</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>shop1</finalName>
